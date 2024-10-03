@@ -1,10 +1,11 @@
 import useAppTheme from '@/hooks/useAppTheme';
-import { Link, Stack } from 'expo-router';
+import { Link, router, Stack, usePathname } from 'expo-router';
 import { StyleSheet, View } from 'react-native';
 import { Text } from 'react-native-paper';
 
 export default function NotFoundScreen() {
   const theme = useAppTheme();
+  const pathname = usePathname();
 
   const styles = StyleSheet.create({
     container: {
@@ -23,7 +24,7 @@ export default function NotFoundScreen() {
     <>
       <Stack.Screen options={{ title: 'Oops!' }} />
       <View style={styles.container}>
-        <Text>This screen doesn't exist.</Text>
+        <Text>This screen ({pathname}) doesn't exist.</Text>
         <Link href="/login" style={styles.link}>
           <Text>Go to login!</Text>
         </Link>

@@ -1,4 +1,4 @@
-import { Image, StyleSheet } from 'react-native';
+import { Image, StyleSheet, TextInput as RNTextInput } from 'react-native';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { appAssets } from '@/assets/app';
 import { Button, Text, TextInput } from 'react-native-paper';
@@ -9,7 +9,7 @@ import { useTogglePasswordVisibility } from '@/hooks/useTogglePasswordVisibility
 import useSession from '@/hooks/useSession';
 
 const LoginScreen = () => {
-  const passwordRef = useRef(null);
+  const passwordRef = useRef<RNTextInput>(null);
   const { passwordVisibility, onPasswordVisibleToggle, rightIcon } =
     useTogglePasswordVisibility();
   const { login } = useSession();
