@@ -1,11 +1,13 @@
 import { initializeApp } from 'firebase/app';
 import {
-  // getAuth,
-  initializeAuth,
+  getAuth,
+  setPersistence,
+  inMemoryPersistence,
   getReactNativePersistence,
 } from 'firebase/auth';
 import Constants from 'expo-constants';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Platform } from 'react-native';
 
 type FirebaseConfigType = {
   apiKey: string;
@@ -27,9 +29,13 @@ const firebaseConfig: FirebaseConfigType = {
 
 // initialize firebase
 const app = initializeApp(firebaseConfig);
-const auth = initializeAuth(app, {
-  persistence: getReactNativePersistence(AsyncStorage),
-});
+const auth = getAuth(app);
+setPersistence(
+  auth,
+  Platform.OS === 'web'
+    ? inMemoryPersistence
+    : getReactNativePersistence(AsyncStorage),
+);
 
 // initialize auth
 // const auth = getAuth(app);

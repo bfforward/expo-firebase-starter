@@ -2,9 +2,12 @@ import { Image, StyleSheet } from 'react-native';
 
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { appAssets } from '@/assets/app';
-import { Text } from 'react-native-paper';
+import { Button, Text } from 'react-native-paper';
+import useSession from '@/hooks/useSession';
 
 export default function HomeScreen() {
+  const { logout } = useSession();
+
   const styles = StyleSheet.create({
     reactLogo: {
       height: 178,
@@ -21,6 +24,9 @@ export default function HomeScreen() {
       headerImage={<Image source={appAssets.header} style={styles.reactLogo} />}
     >
       <Text>Home</Text>
+      <Button mode="contained" onPress={() => logout()}>
+        Logout
+      </Button>
     </ParallaxScrollView>
   );
 }
